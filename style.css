@@ -24,13 +24,14 @@
   --radius-md: 10px;
   --radius-sm: 7px;
   --gap: 16px;
+
+  /* Hintergrundbild zentral definieren */
+  --bg-photo: url("assets/pictures/Eingefügtes Bild_imgupscaler.ai_General_16K.jpg");
 }
 
 * { box-sizing: border-box; }
 
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body{
   font-family: Ubuntu, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -39,6 +40,29 @@ body{
   background-color: var(--bg);
   margin: 0;
   line-height: 1.45;
+
+  /* für z-Index-Isolation der Pseudo-Layer */
+  isolation: isolate;
+  position: relative;
+}
+
+/* OPTIMALE Hintergrundlösung:
+   - füllt Viewport immer (cover)
+   - performant (fixed Layer statt background-attachment)
+   - mit leichter Abdunklung für Lesbarkeit */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(6,14,36,.35), rgba(6,14,36,.35)),
+    var(--bg-photo) center / cover no-repeat;
+}
+
+/* bei reduzierter Bewegung kein fixed parallax-Effekt */
+@media (prefers-reduced-motion: reduce){
+  body::before{ position: absolute; }
 }
 
 /* -------------------- Brand Header -------------------- */
@@ -155,18 +179,11 @@ textarea.input{
   transition: transform .05s ease, filter .15s ease;
 }
 
-.send-button:hover{
-  filter: brightness(1.05);
-}
+.send-button:hover{ filter: brightness(1.05); }
+.send-button:active{ transform: translateY(1px); }
 
-.send-button:active{
-  transform: translateY(1px);
-}
-
-/* -------------------- Footer -------------------- */
-.site-footer{
-  margin: 24px 0 0 0;
-}
+/* -------------------- Footer (beide Seiten) -------------------- */
+.site-footer{ margin: 24px 0 0 0; }
 
 .footerdiv{
   margin: 10px;
@@ -177,22 +194,33 @@ textarea.input{
   color: var(--text);
 }
 
-.footer-cta .contact-us{
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
+/* Home-Variante: dein HTML hat zwei separate .contact-us Links nebeneinander */
+.footerdiv .contact-us{
   color: inherit;
   text-decoration: none;
   font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: clamp(1rem, 2.5vw, 1.4rem);
 }
 
+/* Abstand zwischen Icon-Link und Text-Link */
+.footerdiv .contact-us + .contact-us{
+  margin-left: 14px;
+}
+
+/* sicherstellen, dass das erste .contact-us-Icon schön sitzt */
+.footerdiv .contact-us img{
+  vertical-align: middle;
+}
+
+/* HR-Styling für Home-Seite (dort ist es ein nacktes <hr>) und für die Kontaktseite (.footer-sep) */
+.footerdiv hr,
 .footer-sep{
   border: 0;
   border-top: 1px solid rgba(255,255,255,.2);
   margin: 20px 0;
 }
 
+/* Linkliste im Footer (Kontaktseite) */
 .footer-links{
   display: flex;
   flex-wrap: wrap;
