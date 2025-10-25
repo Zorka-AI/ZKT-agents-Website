@@ -1,92 +1,218 @@
-@font-face {font-family: Ubuntu;    src: url("/assets/fonts/Ubuntu-Regular.ttf") format("truetype");    font-weight: 400;   font-style: normal; font-display: swap;}
-@font-face {font-family: Ubuntu-bold;   src: url("/assets/fonts/Ubuntu-Medium.ttf") format("truetype"); font-weight: 400;   font-style: normal; font-display: swap;}
+/* -------------------- Fonts -------------------- */
+@font-face {
+  font-family: Ubuntu;
+  src: url("/assets/fonts/Ubuntu-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Ubuntu-bold;
+  src: url("/assets/fonts/Ubuntu-Medium.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
+/* -------------------- Base -------------------- */
+:root{
+  --bg: rgb(6, 14, 36);
+  --panel: rgb(1, 14, 65);
+  --accent: rgb(78, 76, 197);
+  --text: azure;
+  --radius-lg: 15px;
+  --radius-md: 10px;
+  --radius-sm: 7px;
+  --gap: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body{
+  font-family: Ubuntu, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+               Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* -------------------- Brand Header -------------------- */
 .brand{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 10px;
-    padding: 10px;
-    padding-left: 35px;
-    font-family: Ubuntu-bold, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bolder;
-    background-color: rgb(1, 14, 65);
-    border-radius: 15px;
-    color: azure;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 10px;
+  padding: 10px 16px 10px 35px;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  background-color: var(--panel);
+  border-radius: var(--radius-lg);
+  color: var(--text);
 }
 
-.footerdiv{
-    align-items: center;
-    gap: .5rem;
-    margin: 10px;
-    padding: 10px;
-    padding-left: 35px;
-    font-family: Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bolder;
-    background-color: rgb(1, 14, 65);
-    border-radius: 15px;
-    color: azure;
-    align-items: center;
+.logo{
+  display: block;
+  border-radius: 12px;
 }
 
+/* -------------------- Page Layout -------------------- */
+.page{
+  padding: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+}
 
+h2{
+  margin: 24px 0 12px 0;
+  font-weight: 600;
+}
+
+/* -------------------- Links -------------------- */
 .link-clean{
-    color: inherit;
-    text-decoration: none;
-    color: azure;
-    align-items: center;
-
+  color: inherit;
+  text-decoration: none;
+}
+.link-clean:hover{
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-.contact-us{
-    color: inherit;
-    text-decoration: none;
-    color: azure;
-    font-family: Ubuntu-bold, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: xx-large;
-    align-items: center;
-}
-
-.linklist{
-    margin-left: 5px;
-    align-items: center;
-    
-}
-
+/* -------------------- Contact Form -------------------- */
 .contact-form{
-font-size: large;
-margin: 10px;
-margin-left: 15px;
-border-radius: 15px;
+  margin-top: 8px;
+  background: transparent;
+  border-radius: var(--radius-lg);
 }
 
-.input{
-    border-radius: 7px;
-    border: none;
-    background-color: rgb(78, 76, 197);
-    color: azure;
-    padding: 6px;
-    font-size: medium;
+.contact-form form{
+  display: grid;
+  grid-template-columns: 1fr;          /* 1 Spalte mobil */
+  gap: var(--gap);
+  max-width: 720px;
+}
+
+@media (min-width: 900px){
+  .contact-form form{
+    grid-template-columns: 1fr 1fr;    /* 2 Spalten Desktop */
+  }
+  .span-2{
+    grid-column: 1 / -1;               /* Nachricht über beide Spalten */
+  }
+}
+
+.form-row{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;                             /* Abstand Label -> Input */
 }
 
 .label{
-    color: azure;
-    font-size: large;
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
 }
 
+.input{
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background-color: var(--accent);
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input::placeholder{ opacity: .85; color: #e6f6ff; }
+
+.input:focus{
+  border-color: #b9c6ff;
+  box-shadow: 0 0 0 3px rgba(185,198,255,.25);
+}
+
+/* Ensure textarea grows vertically only */
+textarea.input{
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* Submit button */
 .send-button{
-    border-radius: 7px;
-    border: none;
-    background-color:  rgb(78, 76, 197);
-    color: azure;
-    padding: 6px;
-    font-size: medium;
+  justify-self: start;
+  border-radius: var(--radius-sm);
+  border: none;
+  background-color: var(--accent);
+  color: var(--text);
+  padding: 10px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform .05s ease, filter .15s ease;
 }
 
-
-body{
-    font-family: Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: azure;
-    background-color: rgb(6, 14, 36);    
+.send-button:hover{
+  filter: brightness(1.05);
 }
 
+.send-button:active{
+  transform: translateY(1px);
+}
+
+/* -------------------- Footer -------------------- */
+.site-footer{
+  margin: 24px 0 0 0;
+}
+
+.footerdiv{
+  margin: 10px;
+  padding: 16px 16px 8px 35px;
+  font-family: Ubuntu, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--panel);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+}
+
+.footer-cta .contact-us{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+}
+
+.footer-sep{
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,.2);
+  margin: 20px 0;
+}
+
+.footer-links{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+}
+
+.footer-links iconify-icon{
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.copy{
+  opacity: .9;
+  margin-top: 14px;
+  font-size: .95rem;
+}
+
+/* -------------------- Accessibility Tweaks -------------------- */
+:focus-visible{
+  outline: 3px solid rgba(185,198,255,.5);
+  outline-offset: 2px;
+}
