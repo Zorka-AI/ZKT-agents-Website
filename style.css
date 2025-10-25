@@ -53,9 +53,40 @@
     
 }
 
+.contact-form{
+font-size: large;
+margin: 10px;
+margin-left: 15px;
+border-radius: 15px;
+}
+
+.input{
+    border-radius: 7px;
+    border: none;
+    background-color: rgb(78, 76, 197);
+    color: azure;
+    padding: 6px;
+    font-size: medium;
+}
+
+.label{
+    color: azure;
+    font-size: large;
+}
+
+.send-button{
+    border-radius: 7px;
+    border: none;
+    background-color:  rgb(78, 76, 197);
+    color: azure;
+    padding: 6px;
+    font-size: medium;
+}
+
+
 body{
     font-family: Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: azure;
-    background-image: image(src="assets/pictures/Screenshot_2025-07-06_230248.png");
+    background-color: rgb(6, 14, 36);    
 }
 
