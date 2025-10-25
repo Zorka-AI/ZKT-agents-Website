@@ -14,9 +14,26 @@
     border-radius: 15px;
 }
 
+.footerdiv{
+    align-items: center;
+    gap: .5rem;
+    margin: 10px;
+    padding: 10px;
+    padding-left: 35px;
+    font-family: Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bolder;
+    background-color: rgb(1, 14, 65);
+    border-radius: 15px;
+}
+
+
 .link-clean{
     color: inherit;
     text-decoration: none;
+}
+
+.linklist{
+    margin-left: 5px;
 }
 
 body{
