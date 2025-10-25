@@ -36,6 +36,14 @@
 
 }
 
+.contact-us{
+    color: inherit;
+    text-decoration: none;
+    color: azure;
+    font-family: Ubuntu-bold, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: xx-large;
+}
+
 .linklist{
     margin-left: 5px;
     
@@ -44,4 +52,8 @@
 body{
     font-family: Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: azure;
+    background-image: image(src="assets/pictures/Screenshot_2025-07-06_230248.png");
+    
+
 }
+
