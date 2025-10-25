@@ -12,6 +12,7 @@
     font-weight: bolder;
     background-color: rgb(1, 14, 65);
     border-radius: 15px;
+    color: azure;
 }
 
 .footerdiv{
@@ -24,18 +25,23 @@
     font-weight: bolder;
     background-color: rgb(1, 14, 65);
     border-radius: 15px;
+    color: azure;
 }
 
 
 .link-clean{
     color: inherit;
     text-decoration: none;
+    color: azure;
+
 }
 
 .linklist{
     margin-left: 5px;
+    
 }
 
 body{
     font-family: Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: azure;
 }
