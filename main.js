@@ -14,6 +14,59 @@
       .replace(/\s+/g, " ")
       .trim();
 
+  // ---------- Theme (LIGHT default, optional DARK) ----------
+  const THEME_KEY = "zkt_theme_v1";
+  const THEMES = { LIGHT: "light", DARK: "dark" };
+
+  const themeBtn = $("#theme-toggle");
+
+  const readTheme = () => {
+    try { return localStorage.getItem(THEME_KEY); } catch { return null; }
+  };
+  const writeTheme = (t) => {
+    try { localStorage.setItem(THEME_KEY, t); } catch {}
+  };
+
+  const setTheme = (t) => {
+    const theme = t === THEMES.DARK ? THEMES.DARK : THEMES.LIGHT;
+    document.documentElement.dataset.theme = theme;
+
+    // Button UI aktualisieren
+    if (themeBtn) {
+      const iconEl = themeBtn.querySelector("iconify-icon");
+      const isDark = theme === THEMES.DARK;
+
+      themeBtn.setAttribute("aria-label", isDark ? "Light Mode aktivieren" : "Dark Mode aktivieren");
+      themeBtn.title = isDark ? "Light Mode" : "Dark Mode";
+
+      if (iconEl) {
+        iconEl.setAttribute(
+          "icon",
+          isDark ? "material-symbols:light-mode-rounded" : "material-symbols:dark-mode-rounded"
+        );
+      }
+    }
+  };
+
+  let currentTheme = readTheme() || THEMES.LIGHT; // ✅ Standard: Light
+  setTheme(currentTheme);
+
+  if (themeBtn) {
+    const toggle = (e) => {
+      // wichtig: Button sitzt in <a>… -> Navigation verhindern
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+
+      currentTheme = currentTheme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK;
+      setTheme(currentTheme);
+      writeTheme(currentTheme);
+    };
+
+    themeBtn.addEventListener("click", toggle);
+    themeBtn.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") toggle(e);
+    });
+  }
+
   // ---------- Global Search / Filter (Homepage) ----------
   const searchInput = $("#site-search");
   const clearBtn = $(".search-clear");
