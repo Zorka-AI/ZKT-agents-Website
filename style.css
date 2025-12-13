@@ -25,12 +25,14 @@
   --radius-sm: 7px;
   --gap: 16px;
 
-  /* Hintergrundbild zentral definieren */
+  /* Mehr Innenabstand in Boxen */
+  --pad-box: 20px;
+  --pad-box-lg: 22px;
+
   --bg-photo: url("/assets/pictures/bg.webp");
 }
 
 * { box-sizing: border-box; }
-
 html, body { height: 100%; }
 
 body{
@@ -40,16 +42,10 @@ body{
   background-color: var(--bg);
   margin: 0;
   line-height: 1.45;
-
-  /* für z-Index-Isolation der Pseudo-Layer */
   isolation: isolate;
   position: relative;
 }
 
-/* OPTIMALE Hintergrundlösung:
-   - füllt Viewport immer (cover)
-   - performant (fixed Layer statt background-attachment)
-   - mit leichter Abdunklung für Lesbarkeit */
 body::before{
   content: "";
   position: fixed;
@@ -60,7 +56,6 @@ body::before{
     var(--bg-photo) center / cover no-repeat;
 }
 
-/* bei reduzierter Bewegung kein fixed parallax-Effekt */
 @media (prefers-reduced-motion: reduce){
   body::before{ position: absolute; }
 }
@@ -106,6 +101,278 @@ h2{
   text-underline-offset: 3px;
 }
 
+/* -------------------- Shared Panels / Buttons -------------------- */
+.panel{
+  background-color: var(--panel);
+  border-radius: var(--radius-lg);
+}
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  transition: transform .05s ease, filter .15s ease, border-color .15s ease, background .15s ease;
+}
+.btn:hover{ filter: brightness(1.06); }
+.btn:active{ transform: translateY(1px); }
+
+.btn-ghost{
+  background: rgba(78, 76, 197, .18);
+  border-color: rgba(185,198,255,.25);
+}
+
+.btn-small{
+  padding: 8px 12px;
+  font-size: .95rem;
+}
+
+/* -------------------- Home: Hero -------------------- */
+.hero{
+  display: grid;
+  gap: 18px;
+  padding: var(--pad-box-lg); /* ↑ mehr Innenabstand */
+  margin-top: 6px;
+}
+
+@media (min-width: 900px){
+  .hero{
+    grid-template-columns: 1.15fr .85fr;
+    align-items: start;
+  }
+}
+
+.eyebrow{
+  margin: 0 0 6px 0;
+  opacity: .9;
+  letter-spacing: .02em;
+}
+
+.hero-title{
+  margin: 0 0 10px 0;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+}
+
+.hero-sub{
+  margin: 0 0 14px 0;
+  opacity: .95;
+  max-width: 62ch;
+}
+
+.hero-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero-right .hint{
+  margin: 10px 0 10px 0;
+  opacity: .9;
+  font-size: .95rem;
+}
+
+/* Search input (Homepage) */
+.search{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px; /* ↑ mehr Innenabstand */
+  border-radius: var(--radius-md);
+  background: rgba(78, 76, 197, .35);
+  border: 1px solid rgba(185,198,255,.18);
+}
+
+.search-icon{
+  font-size: 22px;
+  opacity: .95;
+}
+
+.search-input{
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.search-input::placeholder{ opacity: .85; color: #e6f6ff; }
+
+.search-clear{
+  border: none;
+  background: rgba(255,255,255,.12);
+  color: var(--text);
+  border-radius: 999px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+.search-clear:hover{ filter: brightness(1.08); }
+
+/* Chips */
+.chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip{
+  border: 1px solid rgba(185,198,255,.22);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 12px; /* ↑ minimal größer */
+  cursor: pointer;
+  font-size: .95rem;
+}
+.chip:hover{ filter: brightness(1.08); }
+
+/* -------------------- Home: Overview Grid -------------------- */
+.grid-2{
+  margin-top: 16px;
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 900px){
+  .grid-2{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.panel-card{
+  padding: var(--pad-box-lg); /* ↑ mehr Innenabstand */
+}
+
+.panel-card h3{
+  margin: 0 0 8px 0;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.bullets{
+  margin: 12px 0 0 18px;
+  padding: 0;
+}
+.bullets li{ margin: 6px 0; }
+
+/* -------------------- Sections / Cards -------------------- */
+.section{
+  margin-top: 20px;
+}
+
+.section-head{
+  margin: 0 0 10px 0;
+}
+.section-head h2{
+  margin: 0 0 6px 0;
+}
+.section-sub{
+  margin: 0;
+  opacity: .92;
+}
+
+.card-grid{
+  margin-top: 12px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px){
+  .card-grid{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.card{
+  padding: var(--pad-box); /* ↑ mehr Innenabstand */
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(185,198,255,.18);
+}
+
+.card h3{
+  margin: 0 0 6px 0;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.muted{
+  margin: 0 0 10px 0;
+  opacity: .92;
+}
+
+.mini{
+  margin: 0 0 12px 18px;
+  padding: 0;
+}
+.mini li{ margin: 5px 0; }
+
+.card-meta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tag{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(78, 76, 197, .22);
+  border: 1px solid rgba(185,198,255,.20);
+  font-size: .92rem;
+}
+
+.price{
+  opacity: .9;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* -------------------- Showcase Tiles -------------------- */
+.showcase{
+  margin-top: 12px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px){
+  .showcase{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.show-tile{
+  padding: var(--pad-box); /* ↑ mehr Innenabstand */
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(78, 76, 197, .20), rgba(255,255,255,.06));
+  border: 1px solid rgba(185,198,255,.18);
+}
+
+.show-title{
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin-bottom: 6px;
+}
+
+.show-desc{
+  opacity: .92;
+}
+
 /* -------------------- Contact Form -------------------- */
 .contact-form{
   margin-top: 8px;
@@ -115,24 +382,24 @@ h2{
 
 .contact-form form{
   display: grid;
-  grid-template-columns: 1fr;          /* 1 Spalte mobil */
+  grid-template-columns: 1fr;
   gap: var(--gap);
   max-width: 720px;
 }
 
 @media (min-width: 900px){
   .contact-form form{
-    grid-template-columns: 1fr 1fr;    /* 2 Spalten Desktop */
+    grid-template-columns: 1fr 1fr;
   }
   .span-2{
-    grid-column: 1 / -1;               /* Nachricht über beide Spalten */
+    grid-column: 1 / -1;
   }
 }
 
 .form-row{
   display: flex;
   flex-direction: column;
-  gap: 6px;                             /* Abstand Label -> Input */
+  gap: 6px;
 }
 
 .label{
@@ -160,13 +427,11 @@ h2{
   box-shadow: 0 0 0 3px rgba(185,198,255,.25);
 }
 
-/* Ensure textarea grows vertically only */
 textarea.input{
   resize: vertical;
   min-height: 140px;
 }
 
-/* Submit button */
 .send-button{
   justify-self: start;
   border-radius: var(--radius-sm);
@@ -187,32 +452,23 @@ textarea.input{
 
 .footerdiv{
   margin: 10px;
-  padding: 16px 16px 8px 35px;
+  padding: 18px 18px 10px 35px; /* ↑ minimal mehr */
   font-family: Ubuntu, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   background-color: var(--panel);
   border-radius: var(--radius-lg);
   color: var(--text);
 }
 
-/* Home-Variante: dein HTML hat zwei separate .contact-us Links nebeneinander */
 .footerdiv .contact-us{
   color: inherit;
   text-decoration: none;
   font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: clamp(1rem, 2.5vw, 1.4rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
 }
 
-/* Abstand zwischen Icon-Link und Text-Link */
-.footerdiv .contact-us + .contact-us{
-  margin-left: 14px;
-}
-
-/* sicherstellen, dass das erste .contact-us-Icon schön sitzt */
-.footerdiv .contact-us img{
-  vertical-align: middle;
-}
-
-/* HR-Styling für Home-Seite (dort ist es ein nacktes <hr>) und für die Kontaktseite (.footer-sep) */
 .footerdiv hr,
 .footer-sep{
   border: 0;
@@ -220,7 +476,6 @@ textarea.input{
   margin: 20px 0;
 }
 
-/* Linkliste im Footer (Kontaktseite) */
 .footer-links{
   display: flex;
   flex-wrap: wrap;
@@ -237,6 +492,42 @@ textarea.input{
   opacity: .9;
   margin-top: 14px;
   font-size: .95rem;
+}
+
+/* -------------------- Cookie Banner -------------------- */
+.cookie{
+  position: fixed;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 50;
+}
+
+.cookie-inner{
+  max-width: 960px;
+  margin: 0 auto;
+  background: rgba(1, 14, 65, .92);
+  border: 1px solid rgba(185,198,255,.20);
+  border-radius: var(--radius-lg);
+  padding: var(--pad-box); /* ↑ mehr Innenabstand */
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(6px);
+}
+
+.cookie-text{
+  margin: 0;
+  opacity: .95;
+  max-width: 70ch;
+}
+
+.cookie-actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* -------------------- Accessibility Tweaks -------------------- */

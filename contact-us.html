@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="assets/icon/favicon.png"/>
   <link rel="stylesheet" href="style.css"/>
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js" defer></script>
+  <script src="main.js" defer></script>
 </head>
 
 <body>
@@ -22,6 +23,10 @@
 
     <section class="contact-form">
       <form action="https://amstetten.chickenkiller.com/webhook/kontakt" method="post" accept-charset="UTF-8">
+        <input type="text" name="hp" autocomplete="off"
+          style="position:absolute;left:-10000px;opacity:0;width:1px;height:1px"
+          tabindex="-1" aria-hidden="true"/>
+
         <div class="form-row">
           <label class="label" for="name-input">Name</label>
           <input class="input" type="text" id="name-input" name="name" required autocomplete="name" placeholder="Max Mustermann"/>
@@ -34,12 +39,12 @@
 
         <div class="form-row">
           <label class="label" for="company-name-input">Firma</label>
-          <input class="input" type="text" id="company-name-input" name="company" required autocomplete="organization" placeholder="Google"/>
+          <input class="input" type="text" id="company-name-input" name="company" required autocomplete="organization" placeholder="[Platzhalter]"/>
         </div>
 
         <div class="form-row">
           <label class="label" for="role-input">Rolle in der Firma</label>
-          <input class="input" type="text" id="role-input" name="role" required placeholder="CEO" />
+          <input class="input" type="text" id="role-input" name="role" required placeholder="[Platzhalter]" />
         </div>
 
         <div class="form-row">
@@ -83,7 +88,7 @@
 
         <div class="form-row span-2">
           <label class="label" for="message-input">Nachricht</label>
-          <textarea class="input" id="message-input" name="message" rows="7" required></textarea>
+          <textarea class="input" id="message-input" name="message" rows="7" required placeholder="[Platzhalter]"></textarea>
         </div>
 
         <button class="send-button" type="submit" aria-label="Anfrage abschicken">Anfrage abschicken ➔</button>
@@ -108,13 +113,25 @@
           <span>GitHub</span>
         </a>
         <a class="link-clean" href="mailto:info@zktagents.com">· info@zktagents.com</a>
-        <a class="link-clean" href="#">· Nutzungsbedingungen</a>
-        <a class="link-clean" href="#">· Datenschutzrichtlinien</a>
-        <a class="link-clean" href="#">· Impressum</a>
+        <a class="link-clean" href="terms.html">· Nutzungsbedingungen</a>
+        <a class="link-clean" href="privacy.html">· Datenschutzrichtlinien</a>
+        <a class="link-clean" href="impressum.html">· Impressum</a>
       </nav>
 
       <p class="copy">&copy; 2025 ZKT-AI Agents. Alle Rechte vorbehalten.</p>
     </div>
   </footer>
+
+  <div class="cookie" id="cookie-banner" hidden>
+    <div class="cookie-inner">
+      <p class="cookie-text">
+        Hinweis zu Cookies/Tracking: [Platzhalter – nur anzeigen, wenn optionale Cookies/Tracking aktiv sind.]
+      </p>
+      <div class="cookie-actions">
+        <button class="btn btn-small" type="button" id="cookie-accept">OK</button>
+        <a class="btn btn-ghost btn-small" href="privacy.html">Datenschutz</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

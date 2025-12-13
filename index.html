@@ -1,41 +1,256 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZKT-Agents</title>
-    <link rel="icon" type="image/png" href="assets/icon/favicon.png">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZKT-Agents</title>
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <script src="main.js" defer></script>
 </head>
 
 <body>
-    <a href="index.html" class="link-clean">
-        <header class="brand">
-            <img src="assets/icon/favicon.png" alt="ZKT-Agents Logo" height="60" class="logo">
-            <h1>ZKT-Agents</h1>
-        </header>
-    </a>
-    <h1>Homepage</h1>
-</body>
+  <a href="index.html" class="link-clean">
+    <header class="brand">
+      <img src="assets/icon/favicon.png" alt="ZKT-Agents Logo" height="60" class="logo">
+      <h1>ZKT-Agents</h1>
+    </header>
+  </a>
 
-<footer>
-    <div class="footerdiv">
-        <br>
-        <div style="display: flex; align-items: center;">
-            <div><a class="contact-us" href="contact-us.html"><img src="assets/pictures/mail_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="mail icon" height="76px"></a></div>
-            <div><a class="contact-us" href="contact-us.html" style="position:relative -10px;">Wie können wir helfen? <br> <u>Kontaktieren Sie uns.</u></a></div>
-        </div><br><br><hr><br><br>
-        <br>
-        <div>
-            <a class="link-clean" href="https://www.github.com/Zorka-AI/" target="_blank"><iconify-icon icon="fa6-brands:github" ></iconify-icon>GitHub</a>
-            <a class="link-clean" href="mailto:info@zktagents.com">&ThickSpace;·&ThickSpace; info@zktagents.com</a>
-            <a class="link-clean" href="">&ThickSpace;·&ThickSpace;&ThickSpace;Nutzungsbedingungen</a>
-            <a class="link-clean" href="">&ThickSpace;·&ThickSpace;&ThickSpace;Datenschutzrichtlinien</a>
-            <a class="link-clean" href="">&ThickSpace;·&ThickSpace;&ThickSpace;Impressum</a>
+  <main class="page">
+    <section class="panel hero" aria-label="Startbereich">
+      <div class="hero-left">
+        <p class="eyebrow">KI-Agenten & Automationen</p>
+        <h2 class="hero-title">
+          Alles, was Sie über unsere Leistungen wissen müssen – kompakt zusammengefasst.
+        </h2>
+        <p class="hero-sub">
+          Wir identifizieren KI-Potenziale, schulen Teams und entwickeln maßgeschneiderte Agenten sowie Automationen,
+          die Zeit sparen und Prozesse vereinfachen.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="contact-us.html">
+            Kontakt aufnehmen <span aria-hidden="true">➔</span>
+          </a>
+          <a class="btn btn-ghost" href="#angebote">
+            Angebote ansehen
+          </a>
         </div>
-        <p>&copy; 2025 ZKT-AI Agents. Alle Rechte vorbehalten.</p>
+      </div>
+
+      <div class="hero-right">
+        <label class="label" for="site-search">Agenten & Use-Cases suchen</label>
+
+        <div class="search" role="search">
+          <iconify-icon class="search-icon" icon="material-symbols:search-rounded" aria-hidden="true"></iconify-icon>
+          <input
+            class="input search-input"
+            type="search"
+            id="site-search"
+            placeholder="z.B. Support, E-Mails, Sales, FAQ …"
+            autocomplete="off"
+          >
+          <button class="search-clear" type="button" aria-label="Suche löschen" title="Suche löschen">×</button>
+        </div>
+
+        <p class="hint">Tipp: Klicken Sie auf ein Tag, um schnell zu filtern.</p>
+
+        <div class="chips" aria-label="Schnellfilter">
+          <button class="chip" type="button" data-chip="Support">Support</button>
+          <button class="chip" type="button" data-chip="E-Mails">E-Mails</button>
+          <button class="chip" type="button" data-chip="Sales">Sales</button>
+          <button class="chip" type="button" data-chip="FAQ">FAQ</button>
+          <button class="chip" type="button" data-chip="Automationen">Automationen</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2" id="angebote" aria-label="Überblick">
+      <article class="panel panel-card">
+        <h3>Was wir machen</h3>
+        <p>
+          Wir bringen KI in Ihren Arbeitsalltag – pragmatisch, messbar und sicher.
+          Von der Idee bis zur Umsetzung begleiten wir Sie mit klaren Schritten.
+        </p>
+        <ul class="bullets">
+          <li>KI-Potenziale identifizieren und priorisieren</li>
+          <li>Prozesse analysieren und optimieren</li>
+          <li>Agenten & Automationen produktiv integrieren</li>
+        </ul>
+      </article>
+
+      <article class="panel panel-card">
+        <h3>Was wir anbieten</h3>
+        <p>Sie wählen, was Sie brauchen – wir liefern eine saubere Umsetzung und eine verständliche Übergabe.</p>
+        <ul class="bullets">
+          <li>Identifizierung von KI-Möglichkeiten</li>
+          <li>Team-Schulungen zu KI und Best Practices</li>
+          <li>Maßgeschneiderte KI-Lösungen (Agenten & Automationen)</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section" aria-label="KI-Agenten">
+      <header class="section-head">
+        <h2>KI-Agenten</h2>
+        <p class="section-sub">
+          Unsere KI-Agenten bieten wir in verschiedenen Paketen an – je nach Umfang, Integrationen und gewünschter Betreuung.
+        </p>
+      </header>
+
+      <div class="card-grid" data-search-scope="agents">
+        <article class="card" data-searchable data-title="Support-Agent" data-tags="support faq tickets chat">
+          <h3>Support-Agent</h3>
+          <p class="muted">Antwortet auf häufige Fragen, unterstützt bei Tickets und entlastet Ihr Team.</p>
+          <ul class="mini">
+            <li>FAQ/Helpdesk</li>
+            <li>Ticket-Vorschläge</li>
+            <li>Wissensbasis-Anbindung</li>
+          </ul>
+          <div class="card-meta">
+            <span class="tag">Support</span>
+            <span class="tag">FAQ</span>
+            <span class="price">Preis: [Platzhalter]</span>
+          </div>
+        </article>
+
+        <article class="card" data-searchable data-title="Sales-Agent" data-tags="sales leads pipeline crm">
+          <h3>Sales-Agent</h3>
+          <p class="muted">Qualifiziert Leads, erstellt Antworten und unterstützt beim Nachfassen.</p>
+          <ul class="mini">
+            <li>Lead-Qualifizierung</li>
+            <li>Follow-ups</li>
+            <li>CRM-Workflows</li>
+          </ul>
+          <div class="card-meta">
+            <span class="tag">Sales</span>
+            <span class="tag">Leads</span>
+            <span class="price">Preis: [Platzhalter]</span>
+          </div>
+        </article>
+
+        <article class="card" data-searchable data-title="Recherche-Agent" data-tags="recherche analyse zusammenfassung web">
+          <h3>Recherche-Agent</h3>
+          <p class="muted">Sammelt Informationen, fasst zusammen und bereitet Ergebnisse strukturiert auf.</p>
+          <ul class="mini">
+            <li>Zusammenfassungen</li>
+            <li>Vergleiche</li>
+            <li>Strukturierte Reports</li>
+          </ul>
+          <div class="card-meta">
+            <span class="tag">Recherche</span>
+            <span class="tag">Analyse</span>
+            <span class="price">Preis: [Platzhalter]</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Automationen">
+      <header class="section-head">
+        <h2>Automationen</h2>
+        <p class="section-sub">
+          Automationen übernehmen wiederkehrende Aufgaben – zum Beispiel E-Mails schreiben, Daten pflegen oder Abläufe koordinieren.
+        </p>
+      </header>
+
+      <div class="card-grid" data-search-scope="automations">
+        <article class="card" data-searchable data-title="E-Mail-Automation" data-tags="e-mails automation vorlagen antworten">
+          <h3>E-Mail-Automation</h3>
+          <p class="muted">Entwürfe, Antworten und Vorlagen – konsistent im Ton Ihrer Marke.</p>
+          <div class="card-meta">
+            <span class="tag">E-Mails</span>
+            <span class="tag">Automationen</span>
+            <span class="price">Preis: [Platzhalter]</span>
+          </div>
+        </article>
+
+        <article class="card" data-searchable data-title="Lead-Routing" data-tags="sales automation leads routing crm">
+          <h3>Lead-Routing</h3>
+          <p class="muted">Ordnet Anfragen automatisch zu, priorisiert und aktualisiert Ihr CRM.</p>
+          <div class="card-meta">
+            <span class="tag">Sales</span>
+            <span class="tag">CRM</span>
+            <span class="price">Preis: [Platzhalter]</span>
+          </div>
+        </article>
+
+        <article class="card" data-searchable data-title="Prozess-Automation" data-tags="prozesse automation tools integrations">
+          <h3>Prozess-Automation</h3>
+          <p class="muted">Verbindet Tools, spart Klicks und macht Abläufe zuverlässig.</p>
+          <div class="card-meta">
+            <span class="tag">Prozesse</span>
+            <span class="tag">Integrationen</span>
+            <span class="price">Preis: [Platzhalter]</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="use-cases" aria-label="Beispiele">
+      <header class="section-head">
+        <h2>Beispiele aus der Praxis</h2>
+        <p class="section-sub">
+          So sieht das Ergebnis typischerweise aus: weniger manuelle Arbeit, schnellere Reaktionszeiten und saubere Dokumentation.
+        </p>
+      </header>
+
+      <div class="showcase">
+        <div class="show-tile" data-searchable data-title="Support-Entlastung" data-tags="support tickets faq">
+          <div class="show-title">Support entlasten</div>
+          <div class="show-desc">Automatische Antworten & Ticket-Vorschläge – Ihr Team bleibt im Fokus.</div>
+        </div>
+        <div class="show-tile" data-searchable data-title="Sales-Follow-ups" data-tags="sales e-mails leads">
+          <div class="show-title">Sales Follow-ups</div>
+          <div class="show-desc">Konsequentes Nachfassen, ohne dass es Ihre Zeit frisst.</div>
+        </div>
+        <div class="show-tile" data-searchable data-title="Interne Wissenssuche" data-tags="faq recherche zusammenfassung">
+          <div class="show-title">Wissenssuche</div>
+          <div class="show-desc">Schnelle Antworten aus Ihren Dokumenten – strukturiert und nachvollziehbar.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footerdiv">
+      <div class="footer-cta">
+        <a class="contact-us" href="contact-us.html">
+          <img src="assets/pictures/mail_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="" height="48" aria-hidden="true">
+          <span>Wie können wir helfen? <br><u>Kontaktieren Sie uns.</u></span>
+        </a>
+      </div>
+
+      <hr class="footer-sep">
+
+      <nav class="footer-links" aria-label="Footer Navigation">
+        <a class="link-clean" href="https://www.github.com/Zorka-AI/" target="_blank" rel="noopener">
+          <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+          <span>GitHub</span>
+        </a>
+        <a class="link-clean" href="mailto:info@zktagents.com">· info@zktagents.com</a>
+        <a class="link-clean" href="terms.html">· Nutzungsbedingungen</a>
+        <a class="link-clean" href="privacy.html">· Datenschutzrichtlinien</a>
+        <a class="link-clean" href="impressum.html">· Impressum</a>
+      </nav>
+
+      <p class="copy">&copy; 2025 ZKT-AI Agents. Alle Rechte vorbehalten.</p>
     </div>
-</footer>
+  </footer>
+
+  <!-- Cookie-Banner ist standardmäßig deaktiviert (siehe main.js: ENABLE_COOKIE_BANNER=false) -->
+  <div class="cookie" id="cookie-banner" hidden>
+    <div class="cookie-inner">
+      <p class="cookie-text">
+        Hinweis zu Cookies/Tracking: [Platzhalter – nur anzeigen, wenn optionale Cookies/Tracking aktiv sind.]
+      </p>
+      <div class="cookie-actions">
+        <button class="btn btn-small" type="button" id="cookie-accept">OK</button>
+        <a class="btn btn-ghost btn-small" href="privacy.html">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
