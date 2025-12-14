@@ -18,7 +18,7 @@
 :root{
   /* Background */
   --bg: #ffffff;                /* wie gehabt: voll-weiß */
-  --panel: #f1f3f6;             /* primärer Hintergrund: minimal grau (leicht dunkler als cards) */
+  --panel: #f1f3f6;             /* primärer Hintergrund: minimal grau (leicht dunkler als Cards) */
 
   /* Accents (wie gehabt) */
   --accent: #4e4cc5;            /* primäre Akzentfarbe (original) */
@@ -45,7 +45,8 @@
   --panel-border: rgba(15,23,42,.08);
   --panel-shadow: 0 18px 55px rgba(15,23,42,.06);
 
-  --surface: rgba(15,23,42,.03);          /* Agenten-Karten (leicht heller als panel) */
+  /* Cards: minimal heller als panel */
+  --surface: rgba(15,23,42,.03);
   --surface-border: rgba(15,23,42,.08);
 
   /* Inputs / Search / Chips */
@@ -92,17 +93,20 @@
   /* Buttons */
   --btn-text: #ffffff;
 
-  /* Hover Aura / Shadow (abdunkelnd) */
-  --aura-shadow: rgba(2,6,23,.22);
-  --aura-ring: rgba(2,6,23,.08);
-  --aura-lift: translateY(-1px);
+  /* Aura (LIGHT): deutlich stärker/dunkler + „höherer“ Eindruck über Schatten */
+  --aura-1: rgba(2, 6, 23, .72);
+  --aura-2: rgba(2, 6, 23, .42);
+  --aura-3: rgba(2, 6, 23, .26);
+
+  /* Kein Move -> kein Hover-Flackern / kein sofortiges Verschwinden */
+  --aura-lift: translateY(0);
 }
 
 /* -------------------- Theme (DARK = exakt wie vorher) -------------------- */
 :root[data-theme="dark"]{
   --bg: rgb(6, 14, 36);
   --panel: rgb(1, 14, 65);
-  --accent: rgb(35, 72, 214);
+  --accent: rgb(78, 76, 197);
   --accent-2: rgb(1, 14, 65);
   --text: azure;
 
@@ -154,10 +158,13 @@
   --hero-tile-bg: linear-gradient(135deg, rgba(78, 76, 197, .20), rgba(255,255,255,.06));
   --text-soft: rgba(230,246,255,.92);
 
-  /* Aura (abdunkelnd im Dark) */
-  --aura-shadow: rgba(0,0,0,.45);
-  --aura-ring: rgba(0,0,0,.18);
-  --aura-lift: translateY(-1px);
+  /* Aura (DARK): weiß, stark + gut sichtbar */
+  --aura-1: rgba(255, 255, 255, .62);
+  --aura-2: rgba(255, 255, 255, .34);
+  --aura-3: rgba(255, 255, 255, .20);
+
+  /* Kein Move -> stabil */
+  --aura-lift: translateY(0);
 }
 
 /* -------------------- Base -------------------- */
@@ -224,16 +231,20 @@ body::before{
   background: var(--toggle-bg);
   color: var(--text);
   cursor: pointer;
-  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease, background .18s ease, border-color .18s ease;
+  will-change: box-shadow, filter;
+  transition: box-shadow .34s ease, filter .34s ease, background .22s ease, border-color .22s ease;
 }
 .theme-toggle iconify-icon{ font-size: 22px; }
 .theme-toggle:hover{
-  transform: var(--aura-lift);
-  box-shadow: 0 14px 34px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
+  box-shadow:
+    0 14px 30px -16px var(--aura-2),
+    0 40px 130px -34px var(--aura-1),
+    0 92px 260px -84px var(--aura-3);
 }
 .theme-toggle:active{
-  transform: translateY(0);
-  box-shadow: 0 8px 18px color-mix(in srgb, var(--aura-shadow) 70%, transparent);
+  box-shadow:
+    0 10px 22px -16px var(--aura-2),
+    0 26px 86px -34px var(--aura-1);
 }
 
 /* -------------------- Page Layout -------------------- */
@@ -279,18 +290,23 @@ h2{
   text-decoration: none;
   cursor: pointer;
   font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease, border-color .18s ease, background .18s ease;
+  will-change: box-shadow, filter;
+  transition: box-shadow .34s ease, filter .34s ease, border-color .22s ease, background .22s ease;
 }
 
 .btn:hover{
-  transform: var(--aura-lift);
-  box-shadow: 0 16px 40px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
-  filter: brightness(1.02);
+  /* „höher“ über Schatten (größer, weicher, weiter nach außen) */
+  box-shadow:
+    0 14px 32px -16px var(--aura-2),
+    0 46px 150px -34px var(--aura-1),
+    0 104px 290px -92px var(--aura-3);
+  filter: brightness(1.03);
 }
 
 .btn:active{
-  transform: translateY(0);
-  box-shadow: 0 10px 22px color-mix(in srgb, var(--aura-shadow) 70%, transparent);
+  box-shadow:
+    0 10px 24px -16px var(--aura-2),
+    0 30px 100px -34px var(--aura-1);
 }
 
 .btn-ghost{
@@ -387,14 +403,20 @@ h2{
   cursor: pointer;
   font-size: 18px;
   line-height: 1;
-  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease;
+  will-change: box-shadow, filter;
+  transition: box-shadow .34s ease, filter .34s ease;
 }
 .search-clear:hover{
-  transform: var(--aura-lift);
-  box-shadow: 0 14px 34px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
+  box-shadow:
+    0 12px 26px -16px var(--aura-2),
+    0 38px 120px -34px var(--aura-1),
+    0 90px 240px -92px var(--aura-3);
+  filter: brightness(1.03);
 }
 .search-clear:active{
-  transform: translateY(0);
+  box-shadow:
+    0 10px 22px -16px var(--aura-2),
+    0 24px 86px -34px var(--aura-1);
 }
 
 /* Chips */
@@ -412,11 +434,15 @@ h2{
   padding: 8px 12px;
   cursor: pointer;
   font-size: .95rem;
-  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease, border-color .18s ease;
+  will-change: box-shadow, filter;
+  transition: box-shadow .34s ease, filter .34s ease, border-color .22s ease;
 }
 .chip:hover{
-  transform: var(--aura-lift);
-  box-shadow: 0 14px 34px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
+  box-shadow:
+    0 12px 26px -16px var(--aura-2),
+    0 36px 112px -34px var(--aura-1),
+    0 84px 224px -92px var(--aura-3);
+  filter: brightness(1.02);
 }
 
 /* -------------------- Home: Overview Grid -------------------- */
@@ -621,18 +647,22 @@ textarea.input{
   padding: 10px 14px;
   font-size: 1rem;
   cursor: pointer;
-  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease;
+  will-change: box-shadow, filter;
+  transition: box-shadow .34s ease, filter .34s ease;
 }
 
 .send-button:hover{
-  transform: var(--aura-lift);
-  box-shadow: 0 16px 40px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
-  filter: brightness(1.02);
+  box-shadow:
+    0 14px 32px -16px var(--aura-2),
+    0 46px 150px -34px var(--aura-1),
+    0 104px 290px -92px var(--aura-3);
+  filter: brightness(1.03);
 }
 
 .send-button:active{
-  transform: translateY(0);
-  box-shadow: 0 10px 22px color-mix(in srgb, var(--aura-shadow) 70%, transparent);
+  box-shadow:
+    0 10px 24px -16px var(--aura-2),
+    0 30px 100px -34px var(--aura-1);
 }
 
 /* -------------------- Footer (beide Seiten) -------------------- */
