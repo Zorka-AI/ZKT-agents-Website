@@ -16,14 +16,17 @@
 
 /* -------------------- Theme (LIGHT default) -------------------- */
 :root{
-  /* Core */
-  --bg: #ffffff;
-  --panel: #ffffff;
-  --accent: #2348d6;                 /* vertrauenswürdig / “luxury clean” */
-  --text: #0b1220;
+  /* Background */
+  --bg: #ffffff;                /* wie gehabt: voll-weiß */
+  --panel: #f1f3f6;             /* primärer Hintergrund: minimal grau (leicht dunkler als cards) */
 
-  /* Buttons */
-  --btn-text: #ffffff;
+  /* Accents (wie gehabt) */
+  --accent: #4e4cc5;            /* primäre Akzentfarbe (original) */
+  --accent-2: rgb(1, 14, 65);   /* sekundäre Akzentfarbe (original/navy) */
+
+  /* Text */
+  --text: #0b1220;
+  --text-soft: rgba(15,23,42,.82);
 
   /* Layout */
   --radius-lg: 15px;
@@ -34,59 +37,73 @@
   --pad-box: 20px;
   --pad-box-lg: 22px;
 
-  /* Background layers */
+  /* Background layers (Light: kein Bild) */
   --bg-overlay: none;
   --bg-photo: none;
 
   /* Surfaces / borders / shadows */
-  --panel-border: rgba(15,23,42,.10);
-  --panel-shadow: 0 18px 55px rgba(15,23,42,.07);
+  --panel-border: rgba(15,23,42,.08);
+  --panel-shadow: 0 18px 55px rgba(15,23,42,.06);
 
-  --surface: rgba(15,23,42,.03);
+  --surface: rgba(15,23,42,.03);          /* Agenten-Karten (leicht heller als panel) */
   --surface-border: rgba(15,23,42,.08);
 
-  --search-bg: rgba(35,72,214,.08);
-  --search-border: rgba(35,72,214,.18);
+  /* Inputs / Search / Chips */
+  --search-bg: rgba(78,76,197,.10);
+  --search-border: rgba(78,76,197,.22);
 
   --chip-bg: rgba(15,23,42,.04);
   --chip-border: rgba(15,23,42,.10);
 
-  --tag-bg: rgba(35,72,214,.10);
-  --tag-border: rgba(35,72,214,.18);
+  --tag-bg: rgba(78,76,197,.12);
+  --tag-border: rgba(78,76,197,.22);
 
-  --btn-ghost-bg: rgba(35,72,214,.08);
-  --btn-ghost-border: rgba(35,72,214,.18);
+  --btn-ghost-bg: rgba(78,76,197,.10);
+  --btn-ghost-border: rgba(78,76,197,.22);
 
   --clear-bg: rgba(15,23,42,.06);
 
   --footer-sep: rgba(15,23,42,.10);
 
   --placeholder: rgba(15,23,42,.45);
-  --focus-ring: rgba(35,72,214,.35);
 
+  /* Focus */
+  --focus-ring: rgba(78,76,197,.38);
   --field-bg: #ffffff;
   --field-border: rgba(15,23,42,.14);
-  --field-focus-border: rgba(35,72,214,.55);
-  --field-focus-ring: rgba(35,72,214,.22);
+  --field-focus-border: rgba(78,76,197,.55);
+  --field-focus-ring: rgba(78,76,197,.22);
 
+  /* Cookie */
   --cookie-bg: rgba(255,255,255,.92);
   --cookie-border: rgba(15,23,42,.12);
 
+  /* Toggle */
   --toggle-bg: rgba(15,23,42,.04);
   --toggle-border: rgba(15,23,42,.12);
 
+  /* Footer mail icon */
   --mail-icon-filter: brightness(0) saturate(100%);
   --mail-icon-opacity: .78;
 
-  --hero-tile-bg: linear-gradient(135deg, rgba(35,72,214,.10), rgba(15,23,42,.02));
-  --text-soft: rgba(15,23,42,.82);
+  /* Showcase */
+  --hero-tile-bg: linear-gradient(135deg, rgba(78,76,197,.12), rgba(15,23,42,.02));
+
+  /* Buttons */
+  --btn-text: #ffffff;
+
+  /* Hover Aura / Shadow (abdunkelnd) */
+  --aura-shadow: rgba(2,6,23,.22);
+  --aura-ring: rgba(2,6,23,.08);
+  --aura-lift: translateY(-1px);
 }
 
 /* -------------------- Theme (DARK = exakt wie vorher) -------------------- */
 :root[data-theme="dark"]{
   --bg: rgb(6, 14, 36);
   --panel: rgb(1, 14, 65);
-  --accent: rgb(78, 76, 197);
+  --accent: rgb(35, 72, 214);
+  --accent-2: rgb(1, 14, 65);
   --text: azure;
 
   --btn-text: var(--text);
@@ -117,6 +134,7 @@
   --footer-sep: rgba(255,255,255,.2);
 
   --placeholder: #e6f6ff;
+
   --focus-ring: rgba(185,198,255,.5);
 
   --field-bg: var(--accent);
@@ -135,6 +153,11 @@
 
   --hero-tile-bg: linear-gradient(135deg, rgba(78, 76, 197, .20), rgba(255,255,255,.06));
   --text-soft: rgba(230,246,255,.92);
+
+  /* Aura (abdunkelnd im Dark) */
+  --aura-shadow: rgba(0,0,0,.45);
+  --aura-ring: rgba(0,0,0,.18);
+  --aura-lift: translateY(-1px);
 }
 
 /* -------------------- Base -------------------- */
@@ -201,11 +224,17 @@ body::before{
   background: var(--toggle-bg);
   color: var(--text);
   cursor: pointer;
-  transition: filter .15s ease, transform .05s ease, background .15s ease, border-color .15s ease;
+  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease, background .18s ease, border-color .18s ease;
 }
 .theme-toggle iconify-icon{ font-size: 22px; }
-.theme-toggle:hover{ filter: brightness(1.05); }
-.theme-toggle:active{ transform: translateY(1px); }
+.theme-toggle:hover{
+  transform: var(--aura-lift);
+  box-shadow: 0 14px 34px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
+}
+.theme-toggle:active{
+  transform: translateY(0);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--aura-shadow) 70%, transparent);
+}
 
 /* -------------------- Page Layout -------------------- */
 .page{
@@ -250,10 +279,19 @@ h2{
   text-decoration: none;
   cursor: pointer;
   font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  transition: transform .05s ease, filter .15s ease, border-color .15s ease, background .15s ease;
+  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease, border-color .18s ease, background .18s ease;
 }
-.btn:hover{ filter: brightness(1.06); }
-.btn:active{ transform: translateY(1px); }
+
+.btn:hover{
+  transform: var(--aura-lift);
+  box-shadow: 0 16px 40px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
+  filter: brightness(1.02);
+}
+
+.btn:active{
+  transform: translateY(0);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--aura-shadow) 70%, transparent);
+}
 
 .btn-ghost{
   background: var(--btn-ghost-bg);
@@ -349,8 +387,15 @@ h2{
   cursor: pointer;
   font-size: 18px;
   line-height: 1;
+  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease;
 }
-.search-clear:hover{ filter: brightness(1.08); }
+.search-clear:hover{
+  transform: var(--aura-lift);
+  box-shadow: 0 14px 34px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
+}
+.search-clear:active{
+  transform: translateY(0);
+}
 
 /* Chips */
 .chips{
@@ -367,8 +412,12 @@ h2{
   padding: 8px 12px;
   cursor: pointer;
   font-size: .95rem;
+  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease, border-color .18s ease;
 }
-.chip:hover{ filter: brightness(1.04); }
+.chip:hover{
+  transform: var(--aura-lift);
+  box-shadow: 0 14px 34px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
+}
 
 /* -------------------- Home: Overview Grid -------------------- */
 .grid-2{
@@ -572,10 +621,19 @@ textarea.input{
   padding: 10px 14px;
   font-size: 1rem;
   cursor: pointer;
-  transition: transform .05s ease, filter .15s ease;
+  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease;
 }
-.send-button:hover{ filter: brightness(1.05); }
-.send-button:active{ transform: translateY(1px); }
+
+.send-button:hover{
+  transform: var(--aura-lift);
+  box-shadow: 0 16px 40px var(--aura-shadow), 0 0 0 7px var(--aura-ring);
+  filter: brightness(1.02);
+}
+
+.send-button:active{
+  transform: translateY(0);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--aura-shadow) 70%, transparent);
+}
 
 /* -------------------- Footer (beide Seiten) -------------------- */
 .site-footer{ margin: 24px 0 0 0; }
