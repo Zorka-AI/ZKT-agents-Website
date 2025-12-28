@@ -586,6 +586,7 @@ h2{
 
 /* -------------------- Showcase Tiles -------------------- */
 .showcase{
+  align-items: start;
   margin-top: 12px;
   display: grid;
   gap: 14px;
@@ -806,12 +807,49 @@ textarea.input{
   outline-offset: 2px;
 }
 
-/* --- KI-Agenten: Tag-Boxen ausblenden, Preis bleibt --- */
+/* Desktop-Weirdness fix: Grid-Items nicht auf gleiche Höhe strecken */
+.card-grid{
+  align-items: start; /* statt default stretch */
+}
+
+/* Karten-Inhalt sauber als Spalte, Meta/Preis unten */
+.card{
+  display: flex;
+  flex-direction: column;
+}
+
+/* Meta-Leiste (Preis) nach unten schieben */
+.card-meta{
+  margin-top: auto;
+}
+
+/* Agenten: Tags ausblenden (wie du wolltest), Preis bleibt rechts */
 .card-grid[data-search-scope="agents"] .card-meta .tag{
   display: none;
 }
-
-/* Preis hübsch rechts/kompakt ausrichten */
 .card-grid[data-search-scope="agents"] .card-meta{
   justify-content: flex-end;
+}
+
+/* Grid-Items nicht strecken -> verhindert komische Höhen/Leerräume */
+.card-grid,
+.showcase{
+  align-items: start;
+}
+
+/* KI-Agenten: IMMER untereinander (auch Desktop) */
+.card-grid[data-search-scope="agents"]{
+  grid-template-columns: 1fr !important;
+}
+
+/* Automationen: 3 nebeneinander am Desktop, sonst untereinander */
+@media (min-width: 900px){
+  .card-grid[data-search-scope="automations"]{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Beispiele: 3 nebeneinander am Desktop, sonst untereinander */
+  .showcase{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
