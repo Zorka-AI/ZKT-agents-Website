@@ -545,9 +545,44 @@ h2{
 }
 
 .price{
-  opacity: .9;
+  opacity: 1;
   font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
+
+/* Nur Preise mit Inhalt werden klickbar gemacht (JS setzt data-clickable="true") */
+.price[data-clickable="true"]{
+  cursor: pointer;
+  user-select: none;
+
+  /* minimal prominenter */
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--btn-ghost-bg);
+  border: 1px solid var(--btn-ghost-border);
+
+  will-change: box-shadow, filter;
+  transition: box-shadow .34s ease, filter .34s ease, background .22s ease, border-color .22s ease;
+}
+
+.price[data-clickable="true"]:hover{
+  box-shadow:
+    0 12px 26px -16px var(--aura-2),
+    0 38px 120px -34px var(--aura-1),
+    0 90px 240px -92px var(--aura-3);
+  filter: brightness(1.03);
+}
+
+.price[data-clickable="true"]:active{
+  box-shadow:
+    0 10px 22px -16px var(--aura-2),
+    0 24px 86px -34px var(--aura-1);
+}
+
+.price[data-clickable="true"]:focus-visible{
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 
 /* -------------------- Showcase Tiles -------------------- */
 .showcase{
@@ -603,16 +638,26 @@ h2{
 }
 
 .form-row{
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
+/* Labels visuell verstecken (bleiben für Screenreader erhalten) */
 .label{
-  display: block;
-  color: var(--text);
-  font-size: 1rem;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
+
 
 .input{
   display: block;
@@ -759,4 +804,14 @@ textarea.input{
 :focus-visible{
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
+}
+
+/* --- KI-Agenten: Tag-Boxen ausblenden, Preis bleibt --- */
+.card-grid[data-search-scope="agents"] .card-meta .tag{
+  display: none;
+}
+
+/* Preis hübsch rechts/kompakt ausrichten */
+.card-grid[data-search-scope="agents"] .card-meta{
+  justify-content: flex-end;
 }

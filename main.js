@@ -153,4 +153,31 @@
       history.pushState(null, "", id);
     });
   });
+  
+    // ---------- Price click -> Contact page ----------
+  const PRICE_TARGET = "contact-us.html";
+
+  $$(".price").forEach((el) => {
+    // nur wenn sichtbarer Inhalt vorhanden ist
+    const text = norm(el.textContent);
+    if (!text) return;
+
+    // wenn es schon ein Link ist, nichts doppelt machen
+    if (el.tagName === "A") return;
+
+    el.dataset.clickable = "true";
+    el.setAttribute("role", "link");
+    el.tabIndex = 0;
+
+    const go = (e) => {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      window.location.href = PRICE_TARGET;
+    };
+
+    el.addEventListener("click", go);
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") go(e);
+    });
+  });
+
 })();
