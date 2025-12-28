@@ -881,3 +881,43 @@ textarea.input{
     height: 100%;
   }
 }
+
+/* -------------------- Bullets: stärker hervorheben -------------------- */
+:root{
+  --bullet-marker: var(--accent);
+  --bullet-hl: rgba(78,76,197,.10); /* light */
+}
+
+:root[data-theme="dark"]{
+  --bullet-hl: rgba(78,76,197,.18); /* dark */
+}
+
+/* beide Listen-Typen */
+.bullets,
+.mini{
+  padding-left: 1.15rem;     /* sauberer Einzug */
+  margin-left: 0;
+}
+
+.bullets li,
+.mini li{
+  margin: 10px 0;            /* mehr Luft */
+  font-weight: 600;          /* wichtiger */
+  color: var(--text);
+  line-height: 1.35;
+}
+
+/* Marker selbst hervorheben */
+.bullets li::marker,
+.mini li::marker{
+  color: var(--bullet-marker);
+  font-size: 1.15em;         /* minimal größer */
+}
+
+/* dezentes Highlight (kein harter Kasten) */
+.bullets li,
+.mini li{
+  padding: 4px 6px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--bullet-hl), transparent 72%);
+}
