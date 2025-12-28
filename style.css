@@ -853,3 +853,31 @@ textarea.input{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* Inhalt + Preis sauber unten */
+.card{
+  display: flex;
+  flex-direction: column;
+}
+.card-meta{
+  margin-top: auto; /* Preis/Meta immer ans Kartenende */
+}
+
+/* Mobile/untereinander: NICHT auf gleiche Höhe zwingen */
+.card-grid,
+.showcase{
+  align-items: start;
+}
+
+/* Desktop: NUR dort gleich hohe Boxen (Automationen + Beispiele) */
+@media (min-width: 900px){
+  .card-grid[data-search-scope="automations"],
+  .showcase{
+    align-items: stretch; /* macht Boxen pro Zeile gleich hoch */
+  }
+
+  .card-grid[data-search-scope="automations"] .card,
+  .showcase .show-tile{
+    height: 100%;
+  }
+}

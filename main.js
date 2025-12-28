@@ -153,16 +153,31 @@
       history.pushState(null, "", id);
     });
   });
-  
-    // ---------- Price click -> Contact page ----------
+
+  // ---------- Price placeholders + click -> Contact page ----------
   const PRICE_TARGET = "contact-us.html";
+  const PRICE_PLACEHOLDER = "Preis auf Anfrage"; // Text kannst du frei ändern
 
+  // 1) In jeder card-meta sicherstellen, dass es ein .price gibt + ggf. Platzhalter setzen
+  $$(".card-meta").forEach((meta) => {
+    let price = meta.querySelector(".price");
+
+    // falls gar kein <span class="price"> existiert -> anlegen
+    if (!price) {
+      price = document.createElement("span");
+      price.className = "price";
+      meta.appendChild(price);
+    }
+
+    // falls leer -> Platzhalter rein
+    if (!norm(price.textContent)) {
+      price.textContent = PRICE_PLACEHOLDER;
+      price.dataset.placeholder = "true";
+    }
+  });
+
+  // 2) Preise klickbar machen (inkl. Platzhalter)
   $$(".price").forEach((el) => {
-    // nur wenn sichtbarer Inhalt vorhanden ist
-    const text = norm(el.textContent);
-    if (!text) return;
-
-    // wenn es schon ein Link ist, nichts doppelt machen
     if (el.tagName === "A") return;
 
     el.dataset.clickable = "true";
@@ -179,5 +194,4 @@
       if (e.key === "Enter" || e.key === " ") go(e);
     });
   });
-
 })();
