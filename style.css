@@ -16,24 +16,35 @@
 
 /* -------------------- Theme (LIGHT default) -------------------- */
 :root{
-  /* Background */
-  --bg: #ffffff;                /* wie gehabt: voll-weiß */
-  --panel: #f1f3f6;             /* primärer Hintergrund: minimal grau (leicht dunkler als Cards) */
 
-  /* Accents (wie gehabt) */
-  --accent: #4e4cc5;            /* primäre Akzentfarbe (original) */
-  --accent-2: rgb(1, 14, 65);   /* sekundäre Akzentfarbe (original/navy) */
+  --bullet-fade-a: rgba(78,76,197,.14);
+  --bullet-fade-b: rgba(78,76,197,.07);
+  --bullet-border: rgba(15,23,42,.10);
+  --bullet-dot: var(--accent);
+  --bullet-radius: 14px;
+  --bullet-pad-y: 9px;
+  --bullet-pad-x: 12px;
+  --bullet-gap: 12px;         /* Dot <-> Text */
+  --bullet-edge-gap: 10px;    /* Abstand zur rechten Card-Kante */
+
+  /* Background */
+  --bg: #ffffff;
+  --panel: #f1f3f6;
+
+  /* Accents */
+  --accent: #4e4cc5;
+  --accent-2: rgb(1, 14, 65);
 
   /* Text */
   --text: #0b1220;
   --text-soft: rgba(15,23,42,.82);
+  --placeholder: rgba(15,23,42,.45);
 
   /* Layout */
   --radius-lg: 15px;
   --radius-md: 10px;
   --radius-sm: 7px;
   --gap: 16px;
-
   --pad-box: 20px;
   --pad-box-lg: 22px;
 
@@ -45,11 +56,10 @@
   --panel-border: rgba(15,23,42,.08);
   --panel-shadow: 0 18px 55px rgba(15,23,42,.06);
 
-  /* Cards: minimal heller als panel */
   --surface: rgba(15,23,42,.03);
   --surface-border: rgba(15,23,42,.08);
 
-  /* Inputs / Search / Chips */
+  /* Inputs / Search / Chips / Tags / Buttons */
   --search-bg: rgba(78,76,197,.10);
   --search-border: rgba(78,76,197,.22);
 
@@ -64,11 +74,7 @@
 
   --clear-bg: rgba(15,23,42,.06);
 
-  --footer-sep: rgba(15,23,42,.10);
-
-  --placeholder: rgba(15,23,42,.45);
-
-  /* Focus */
+  /* Focus / Fields */
   --focus-ring: rgba(78,76,197,.38);
   --field-bg: #ffffff;
   --field-border: rgba(15,23,42,.14);
@@ -83,7 +89,8 @@
   --toggle-bg: rgba(15,23,42,.04);
   --toggle-border: rgba(15,23,42,.12);
 
-  /* Footer mail icon */
+  /* Footer */
+  --footer-sep: rgba(15,23,42,.10);
   --mail-icon-filter: brightness(0) saturate(100%);
   --mail-icon-opacity: .78;
 
@@ -93,17 +100,33 @@
   /* Buttons */
   --btn-text: #ffffff;
 
-  /* Aura (LIGHT): deutlich stärker/dunkler + „höherer“ Eindruck über Schatten */
+  /* Aura (LIGHT) */
   --aura-1: rgba(2, 6, 23, .72);
   --aura-2: rgba(2, 6, 23, .42);
   --aura-3: rgba(2, 6, 23, .26);
 
-  /* Kein Move -> kein Hover-Flackern / kein sofortiges Verschwinden */
-  --aura-lift: translateY(0);
+  /* Bullets (LIGHT) */
+  --bullet-glass-bg: rgba(255,255,255,.06);
+  --bullet-glass-border: rgba(15,23,42,.14);
+  --bullet-glass-inset-top: rgba(255,255,255,.22);
+  --bullet-glass-inset-bottom: rgba(2,6,23,.10);
+
+  --bullet-dot: var(--accent);
+  --bullet-radius: 16px;
+  --bullet-pad-y: 10px;
+  --bullet-pad-x: 14px;
+  --bullet-dot-size: 10px;
+  --bullet-dot-gap: 12px;
 }
 
-/* -------------------- Theme (DARK = exakt wie vorher) -------------------- */
+/* -------------------- Theme (DARK) -------------------- */
 :root[data-theme="dark"]{
+
+  --bullet-fade-a: rgba(78,76,197,.22);
+  --bullet-fade-b: rgba(78,76,197,.10);
+  --bullet-border: rgba(185,198,255,.18);
+  --bullet-dot: rgba(185,198,255,.92);
+
   --bg: rgb(6, 14, 36);
   --panel: rgb(1, 14, 65);
   --accent: rgb(78, 76, 197);
@@ -158,18 +181,22 @@
   --hero-tile-bg: linear-gradient(135deg, rgba(78, 76, 197, .20), rgba(255,255,255,.06));
   --text-soft: rgba(230,246,255,.92);
 
-  /* Aura (DARK): weiß, stark + gut sichtbar */
+  /* Aura (DARK) */
   --aura-1: rgba(255, 255, 255, .62);
   --aura-2: rgba(255, 255, 255, .34);
   --aura-3: rgba(255, 255, 255, .20);
 
-  /* Kein Move -> stabil */
-  --aura-lift: translateY(0);
+  /* Bullets (DARK) */
+  --bullet-glass-bg: rgba(255,255,255,.06);
+  --bullet-glass-border: rgba(185,198,255,.22);
+  --bullet-glass-inset-top: rgba(255,255,255,.16);
+  --bullet-glass-inset-bottom: rgba(0,0,0,.24);
+  --bullet-dot: rgba(185,198,255,.92);
 }
 
 /* -------------------- Base -------------------- */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
 
 body{
   font-family: Ubuntu, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -182,6 +209,7 @@ body{
   position: relative;
 }
 
+/* Background photo/overlay */
 body::before{
   content: "";
   position: fixed;
@@ -197,57 +225,12 @@ body::before{
   body::before{ position: absolute; }
 }
 
-/* -------------------- Brand Header -------------------- */
-.brand{
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 10px;
-  padding: 10px 16px 10px 35px;
-  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-weight: 700;
-  background-color: var(--panel);
-  border-radius: var(--radius-lg);
-  color: var(--text);
-  border: 1px solid var(--panel-border);
-  box-shadow: var(--panel-shadow);
-}
+/* weniger “Dauer-fett” */
+.hero-title{ font-weight: 650; }
+.brand{ font-weight: 650; }
+b, strong{ font-weight: 600; }
 
-.logo{
-  display: block;
-  border-radius: 12px;
-}
-
-/* Theme Toggle Button (in title bar) */
-.theme-toggle{
-  margin-left: auto;
-  width: 44px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  border: 1px solid var(--toggle-border);
-  background: var(--toggle-bg);
-  color: var(--text);
-  cursor: pointer;
-  will-change: box-shadow, filter;
-  transition: box-shadow .34s ease, filter .34s ease, background .22s ease, border-color .22s ease;
-}
-.theme-toggle iconify-icon{ font-size: 22px; }
-.theme-toggle:hover{
-  box-shadow:
-    0 14px 30px -16px var(--aura-2),
-    0 40px 130px -34px var(--aura-1),
-    0 92px 260px -84px var(--aura-3);
-}
-.theme-toggle:active{
-  box-shadow:
-    0 10px 22px -16px var(--aura-2),
-    0 26px 86px -34px var(--aura-1);
-}
-
-/* -------------------- Page Layout -------------------- */
+/* -------------------- Layout / Typography -------------------- */
 .page{
   padding: 16px;
   max-width: 960px;
@@ -295,14 +278,12 @@ h2{
 }
 
 .btn:hover{
-  /* „höher“ über Schatten (größer, weicher, weiter nach außen) */
   box-shadow:
     0 14px 32px -16px var(--aura-2),
     0 46px 150px -34px var(--aura-1),
     0 104px 290px -92px var(--aura-3);
   filter: brightness(1.03);
 }
-
 .btn:active{
   box-shadow:
     0 10px 24px -16px var(--aura-2),
@@ -318,6 +299,54 @@ h2{
 .btn-small{
   padding: 8px 12px;
   font-size: .95rem;
+}
+
+/* -------------------- Brand Header -------------------- */
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 10px;
+  padding: 10px 16px 10px 35px;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--panel);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
+}
+
+.logo{
+  display: block;
+  border-radius: 12px;
+}
+
+.theme-toggle{
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid var(--toggle-border);
+  background: var(--toggle-bg);
+  color: var(--text);
+  cursor: pointer;
+  will-change: box-shadow, filter;
+  transition: box-shadow .34s ease, filter .34s ease, background .22s ease, border-color .22s ease;
+}
+.theme-toggle iconify-icon{ font-size: 22px; }
+.theme-toggle:hover{
+  box-shadow:
+    0 14px 30px -16px var(--aura-2),
+    0 40px 130px -34px var(--aura-1),
+    0 92px 260px -84px var(--aura-3);
+}
+.theme-toggle:active{
+  box-shadow:
+    0 10px 22px -16px var(--aura-2),
+    0 26px 86px -34px var(--aura-1);
 }
 
 /* -------------------- Home: Hero -------------------- */
@@ -344,7 +373,6 @@ h2{
 .hero-title{
   margin: 0 0 10px 0;
   font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-weight: 700;
   font-size: clamp(1.35rem, 2.5vw, 1.75rem);
 }
 
@@ -361,12 +389,12 @@ h2{
 }
 
 .hero-right .hint{
-  margin: 10px 0 10px 0;
+  margin: 10px 0;
   opacity: .9;
   font-size: .95rem;
 }
 
-/* Search input (Homepage) */
+/* Search */
 .search{
   display: flex;
   align-items: center;
@@ -425,7 +453,6 @@ h2{
   flex-wrap: wrap;
   gap: 8px;
 }
-
 .chip{
   border: 1px solid var(--chip-border);
   background: var(--chip-bg);
@@ -451,55 +478,32 @@ h2{
   display: grid;
   gap: 16px;
 }
-
 @media (min-width: 900px){
-  .grid-2{
-    grid-template-columns: 1fr 1fr;
-  }
+  .grid-2{ grid-template-columns: 1fr 1fr; }
 }
 
-.panel-card{
-  padding: var(--pad-box-lg);
-}
-
+.panel-card{ padding: var(--pad-box-lg); }
 .panel-card h3{
   margin: 0 0 8px 0;
   font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-.bullets{
-  margin: 12px 0 0 18px;
-  padding: 0;
-}
-.bullets li{ margin: 6px 0; }
-
 /* -------------------- Sections / Cards -------------------- */
-.section{
-  margin-top: 20px;
-}
+.section{ margin-top: 20px; }
 
-.section-head{
-  margin: 0 0 10px 0;
-}
-.section-head h2{
-  margin: 0 0 6px 0;
-}
-.section-sub{
-  margin: 0;
-  opacity: .92;
-}
+.section-head{ margin: 0 0 10px 0; }
+.section-head h2{ margin: 0 0 6px 0; }
+.section-sub{ margin: 0; opacity: .92; }
 
 .card-grid{
   margin-top: 12px;
   display: grid;
   gap: 14px;
   grid-template-columns: 1fr;
+  align-items: start; /* default: keine komischen gleichhohen Karten */
 }
-
 @media (min-width: 900px){
-  .card-grid{
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+  .card-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 .card{
@@ -507,6 +511,9 @@ h2{
   border-radius: var(--radius-lg);
   background: var(--surface);
   border: 1px solid var(--surface-border);
+
+  display: flex;
+  flex-direction: column;
 }
 
 .card h3{
@@ -520,18 +527,14 @@ h2{
   opacity: 1;
 }
 
-.mini{
-  margin: 0 0 12px 18px;
-  padding: 0;
-}
-.mini li{ margin: 5px 0; }
-
+/* Meta immer unten */
 .card-meta{
+  margin-top: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .tag{
@@ -545,20 +548,29 @@ h2{
 }
 
 .price{
+  margin-left: auto;
   opacity: 1;
   font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-weight: 650;
+  white-space: nowrap;
 }
 
-/* Nur Preise mit Inhalt werden klickbar gemacht (JS setzt data-clickable="true") */
+/* klickbarer Preis-Chip */
 .price[data-clickable="true"]{
-  cursor: pointer;
-  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  /* minimal prominenter */
-  padding: 6px 10px;
-  border-radius: 999px;
+  min-height: 42px;      /* größer */
+  padding: 10px 20px;    /* größerer Innenabstand */
+  font-size: 1rem;
+
+  border-radius: var(--radius-sm);
   background: var(--btn-ghost-bg);
   border: 1px solid var(--btn-ghost-border);
+
+  cursor: pointer;
+  user-select: none;
 
   will-change: box-shadow, filter;
   transition: box-shadow .34s ease, filter .34s ease, background .22s ease, border-color .22s ease;
@@ -578,25 +590,120 @@ h2{
     0 24px 86px -34px var(--aura-1);
 }
 
-.price[data-clickable="true"]:focus-visible{
-  outline: 3px solid var(--focus-ring);
-  outline-offset: 2px;
+/* Agents: Tags ausblenden, Preis rechts */
+.card-grid[data-search-scope="agents"] .card-meta .tag{ display: none; }
+.card-grid[data-search-scope="agents"] .card-meta{ justify-content: flex-end; }
+.card-grid[data-search-scope="agents"]{ grid-template-columns: 1fr; }
+@media (min-width: 900px){
+  .card-grid[data-search-scope="agents"]{ grid-template-columns: 1fr; }
+}
+
+/* Desktop: Automationen gleich hoch, wenn du es willst */
+@media (min-width: 900px){
+  .card-grid[data-search-scope="automations"]{ align-items: stretch; }
+  .card-grid[data-search-scope="automations"] .card{ height: 100%; }
+}
+
+/* -------------------- Bullets (Wrap-fest, sauber geführt) -------------------- */
+/* Listen: sauberes Spacing, Abstand zur Box-Kante */
+.bullets,
+.mini{
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding-right: var(--bullet-edge-gap); /* <- hält Abstand zur rechten Box-Kante */
+}
+
+/*
+  LI: "hug text" + Wrap ok
+  - inline-grid => Element ist inline-level (schrumpft auf Inhalt)
+  - max-width verhindert Overflow, bei langem Text wird umgebrochen
+  - Gradient nach rechts => wirkt wie "fadet aus", nicht wie Button
+*/
+.bullets li,
+.mini li{
+  display: inline-grid;
+  grid-template-columns: 10px 1fr;
+  column-gap: var(--bullet-gap);
+  align-items: start;
+
+  width: fit-content;
+  max-width: calc(100% - var(--bullet-edge-gap)); /* <- Abstand bleibt auch bei Wrap */
+
+  padding: var(--bullet-pad-y) var(--bullet-pad-x);
+  border-radius: var(--bullet-radius);
+
+  font-weight: 520;
+  line-height: 1.35;
+  color: var(--text);
+
+  /* nicht "pressable": kein fetter Shadow, kein Pill, kein Button-Look */
+  border: 1px solid var(--bullet-border);
+  box-shadow: none;
+  cursor: default;
+
+  /* rechts ausfaden */
+  background: linear-gradient(
+    90deg,
+    var(--bullet-fade-a) 0%,
+    var(--bullet-fade-b) 55%,
+    transparent 100%
+  );
+}
+
+/* Dot sitzt stabil (kein komisches Verhalten beim Wrap) */
+.bullets li::before,
+.mini li::before{
+  content: "";
+  width: 10px;
+  height: 10px;
+  margin-top: 0.35em;
+
+  border-radius: 3px;
+  background: var(--bullet-dot);
+
+  /* subtil, aber nicht wie ein Button */
+  box-shadow: 0 0 0 3px rgba(78,76,197,.12);
+}
+
+/* Hover nur minimal (nicht “klickbar”) */
+.bullets li:hover,
+.mini li:hover{
+  filter: brightness(1.02);
 }
 
 
-/* -------------------- Showcase Tiles -------------------- */
+/* In Cards kompakter */
+.card .bullets,
+.card .mini{
+  margin-top: 10px;
+  gap: 8px;
+}
+.card .bullets li,
+.card .mini li{
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+
+/* -------------------- Showcase Tiles (optional, falls aktiv) -------------------- */
 .showcase{
-  align-items: start;
   margin-top: 12px;
   display: grid;
   gap: 14px;
   grid-template-columns: 1fr;
+  align-items: start;
 }
-
 @media (min-width: 900px){
   .showcase{
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
   }
+  .showcase .show-tile{ height: 100%; }
 }
 
 .show-tile{
@@ -611,9 +718,7 @@ h2{
   margin-bottom: 6px;
 }
 
-.show-desc{
-  color: var(--text-soft);
-}
+.show-desc{ color: var(--text-soft); }
 
 /* -------------------- Contact Form -------------------- */
 .contact-form{
@@ -630,12 +735,8 @@ h2{
 }
 
 @media (min-width: 900px){
-  .contact-form form{
-    grid-template-columns: 1fr 1fr;
-  }
-  .span-2{
-    grid-column: 1 / -1;
-  }
+  .contact-form form{ grid-template-columns: 1fr 1fr; }
+  .span-2{ grid-column: 1 / -1; }
 }
 
 .form-row{
@@ -659,7 +760,6 @@ h2{
   border: 0 !important;
 }
 
-
 .input{
   display: block;
   width: 100%;
@@ -671,7 +771,6 @@ h2{
   font-size: 1rem;
   outline: none;
 }
-
 .input::placeholder{ opacity: .9; color: var(--placeholder); }
 
 .input:focus{
@@ -696,7 +795,6 @@ textarea.input{
   will-change: box-shadow, filter;
   transition: box-shadow .34s ease, filter .34s ease;
 }
-
 .send-button:hover{
   box-shadow:
     0 14px 32px -16px var(--aura-2),
@@ -704,14 +802,13 @@ textarea.input{
     0 104px 290px -92px var(--aura-3);
   filter: brightness(1.03);
 }
-
 .send-button:active{
   box-shadow:
     0 10px 24px -16px var(--aura-2),
     0 30px 100px -34px var(--aura-1);
 }
 
-/* -------------------- Footer (beide Seiten) -------------------- */
+/* -------------------- Footer -------------------- */
 .site-footer{ margin: 24px 0 0 0; }
 
 .footerdiv{
@@ -753,7 +850,6 @@ textarea.input{
   gap: 10px 18px;
   align-items: center;
 }
-
 .footer-links iconify-icon{
   vertical-align: middle;
   margin-right: 6px;
@@ -801,123 +897,8 @@ textarea.input{
   justify-content: flex-end;
 }
 
-/* -------------------- Accessibility Tweaks -------------------- */
+/* -------------------- Accessibility -------------------- */
 :focus-visible{
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
-}
-
-/* Desktop-Weirdness fix: Grid-Items nicht auf gleiche Höhe strecken */
-.card-grid{
-  align-items: start; /* statt default stretch */
-}
-
-/* Karten-Inhalt sauber als Spalte, Meta/Preis unten */
-.card{
-  display: flex;
-  flex-direction: column;
-}
-
-/* Meta-Leiste (Preis) nach unten schieben */
-.card-meta{
-  margin-top: auto;
-}
-
-/* Agenten: Tags ausblenden (wie du wolltest), Preis bleibt rechts */
-.card-grid[data-search-scope="agents"] .card-meta .tag{
-  display: none;
-}
-.card-grid[data-search-scope="agents"] .card-meta{
-  justify-content: flex-end;
-}
-
-/* Grid-Items nicht strecken -> verhindert komische Höhen/Leerräume */
-.card-grid,
-.showcase{
-  align-items: start;
-}
-
-/* KI-Agenten: IMMER untereinander (auch Desktop) */
-.card-grid[data-search-scope="agents"]{
-  grid-template-columns: 1fr !important;
-}
-
-/* Automationen: 3 nebeneinander am Desktop, sonst untereinander */
-@media (min-width: 900px){
-  .card-grid[data-search-scope="automations"]{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  /* Beispiele: 3 nebeneinander am Desktop, sonst untereinander */
-  .showcase{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-/* Inhalt + Preis sauber unten */
-.card{
-  display: flex;
-  flex-direction: column;
-}
-.card-meta{
-  margin-top: auto; /* Preis/Meta immer ans Kartenende */
-}
-
-/* Mobile/untereinander: NICHT auf gleiche Höhe zwingen */
-.card-grid,
-.showcase{
-  align-items: start;
-}
-
-/* Desktop: NUR dort gleich hohe Boxen (Automationen + Beispiele) */
-@media (min-width: 900px){
-  .card-grid[data-search-scope="automations"],
-  .showcase{
-    align-items: stretch; /* macht Boxen pro Zeile gleich hoch */
-  }
-
-  .card-grid[data-search-scope="automations"] .card,
-  .showcase .show-tile{
-    height: 100%;
-  }
-}
-
-/* -------------------- Bullets: stärker hervorheben -------------------- */
-:root{
-  --bullet-marker: var(--accent);
-  --bullet-hl: rgba(78,76,197,.10); /* light */
-}
-
-:root[data-theme="dark"]{
-  --bullet-hl: rgba(78,76,197,.18); /* dark */
-}
-
-/* beide Listen-Typen */
-.bullets,
-.mini{
-  padding-left: 1.15rem;     /* sauberer Einzug */
-  margin-left: 0;
-}
-
-.bullets li,
-.mini li{
-  margin: 10px 0;            /* mehr Luft */
-  font-weight: 600;          /* wichtiger */
-  color: var(--text);
-  line-height: 1.35;
-}
-
-/* Marker selbst hervorheben */
-.bullets li::marker,
-.mini li::marker{
-  color: var(--bullet-marker);
-  font-size: 1.15em;         /* minimal größer */
-}
-
-/* dezentes Highlight (kein harter Kasten) */
-.bullets li,
-.mini li{
-  padding: 4px 6px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, var(--bullet-hl), transparent 72%);
 }
