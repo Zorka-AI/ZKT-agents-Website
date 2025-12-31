@@ -902,3 +902,40 @@ textarea.input{
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
+
+.tag[data-clickable="true"]{
+  cursor: pointer;
+  user-select: none;
+}
+.tag[data-clickable="true"]:hover{
+  filter: brightness(1.05);
+}
+
+/* Tags in den Cards niemals sichtbar – nur "im Hintergrund" nutzen */
+.card-meta .tag{
+  display: none !important;
+}
+
+/* ✅ hidden MUSS immer gewinnen (auch gegen display:flex/grid/etc.) */
+[hidden]{
+  display: none !important;
+}
+
+/* ✅ Contact-Form: Labels sichtbar machen (nur auf contact-us.html Bereich) */
+.contact-form .label{
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 0 6px 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  white-space: normal !important;
+  border: 0 !important;
+
+  opacity: .92;
+  font-size: .95rem;
+  font-family: Ubuntu-bold, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}

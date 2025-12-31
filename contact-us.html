@@ -16,7 +16,6 @@
       <img src="assets/icon/favicon.png" alt="ZKT-Agents Logo" height="60" class="logo"/>
       <h1>ZKT-Agents</h1>
 
-      <!-- NEU: Dark-Mode Toggle -->
       <button class="theme-toggle" type="button" id="theme-toggle"
         aria-label="Dark Mode aktivieren" title="Dark Mode">
         <iconify-icon icon="material-symbols:dark-mode-rounded" aria-hidden="true"></iconify-icon>
@@ -25,7 +24,10 @@
   </a>
 
   <main class="page">
-    <h2>Füllen Sie dieses Formular aus und wir melden uns innerhalb von 24&nbsp;Stunden.</h2>
+    <header class="section-head">
+      <h2>Kontakt</h2>
+      <p class="section-sub">Wir melden uns innerhalb von 24&nbsp;Stunden.</p>
+    </header>
 
     <section class="contact-form">
       <form action="https://amstetten.chickenkiller.com/webhook/kontakt" method="post" accept-charset="UTF-8">
@@ -50,12 +52,21 @@
 
         <div class="form-row">
           <label class="label" for="role-input">Rolle in der Firma</label>
-          <input class="input" type="text" id="role-input" name="role" required placeholder="(optional)" />
+          <input class="input" type="text" id="role-input" name="role" placeholder="(optional)"/>
         </div>
 
         <div class="form-row">
           <label class="label" for="website-input">Website der Firma</label>
-          <input class="input" type="url" id="website-input" name="website" required placeholder="https://example.com"/>
+          <input
+            class="input"
+            type="text"
+            id="website-input"
+            name="website"
+            required
+            inputmode="url"
+            autocomplete="url"
+            placeholder="example.com"
+          />
         </div>
 
         <div class="form-row">
@@ -119,7 +130,6 @@
           <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
           <span>GitHub</span>
         </a>
-        <a class="link-clean" href="mailto:info@zktagents.com">· info@zktagents.com</a>
         <a class="link-clean" href="terms.html">· Nutzungsbedingungen</a>
         <a class="link-clean" href="privacy.html">· Datenschutzrichtlinien</a>
         <a class="link-clean" href="impressum.html">· Impressum</a>
